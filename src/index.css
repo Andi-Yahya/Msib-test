@@ -1,0 +1,9 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer components {
+  .whiteUnderline {
+    @apply bg-white h-2 w-12 rounded-md;
+  }
+}
