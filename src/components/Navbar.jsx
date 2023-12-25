@@ -1,58 +1,51 @@
-import React, { useState, useEffect } from "react";
+import React, { useRef, useState, useEffect } from "react";
 
-const Navbar = () => {
+export const Navbar = () => {
   const [activeLink, setActiveLink] = useState(null);
-  const [scrollY, setScrollY] = useState(0);
-  const [navbarVisible, setNavbarVisible] = useState(true);
 
   const handleLinkClick = (index) => {
     setActiveLink(index);
   };
 
+  const navScroll = useRef(null);
+  // let fixedNav = navScroll.current?.offsetTop; // Fix: Add "?." to safely access offsetTop
+  // let scrollTop = window.scrollY
+
+  console.log(navScroll);
+  let lastScroll = 0;
+  window.addEventListener("scroll", () => {
+    let currentScroll = window.scrollY;
+    if (currentScroll - lastScroll > 0) {
+      navScroll?.current?.classList.add("fixed");
+      navScroll?.current?.classList.add("navbar-fixed");
+      navScroll?.current?.classList.add("scroll-down");
+      navScroll?.current?.classList.remove("scroll-up");
+    } else if (currentScroll === 0) {
+      navScroll?.current?.classList.remove("fixed");
+      navScroll?.current?.classList.remove("navbar-fixed");
+    } else {
+      navScroll?.current?.classList.add("scroll-up");
+      navScroll?.current?.classList.add("fixed");
+      navScroll?.current?.classList.remove("scroll-down");
+    }
+
+    lastScroll = currentScroll;
+  });
+
   const generateUnderline = (index) => {
     if (index === activeLink) {
-      return <div className="bg-white h-2 w-10 p-1 rounded-md"></div>;
+      return <div className="bg-white h-2 w-auto  rounded-md"></div>;
     }
     return null;
   };
 
-  const handleScroll = () => {
-    const currentScrollY = window.scrollY;
-    setScrollY(currentScrollY);
-
-    setNavbarVisible(currentScrollY <= 50); 
-  };
-
-  useEffect(() => {
-    window.addEventListener("scroll", handleScroll);
-    return () => {
-      window.removeEventListener("scroll", handleScroll);
-    };
-  }, []);
+  const listMenu = ["Work", "About", "Services", "Ideas", "Careers", "Contact"];
 
   return (
     <>
-      <style>
-        {`
-          body {
-            overflow-y: auto;
-            margin: 0; /* Tambahkan margin 0 untuk menghindari padding bawaan body */
-          }
-          #navbar {
-            opacity: ${navbarVisible ? "1" : "0"};
-            transition: opacity 0.3s ease-in-out;
-            position: fixed;
-            top: 0;
-            width: 100%;
-            z-index: 1000;
-          }
-        `}
-      </style>
       <nav
-        id="navbar"
-        className={`bg-orange-700 transition-all duration-300 ${
-          !navbarVisible ? "opacity-0" : ""
-        }`}
+        className="bg-orange-700  fixed z-10  top-0 left-0 w-full transition-all delay-200"
+        ref={navScroll}
       >
         <div className="mx-auto max-w-7xl px-2 xs:px-6 lg:px-8">
           <div className="relative flex h-24 items-center justify-between">
@@ -64,14 +57,7 @@ const Navbar = () => {
             <div className="absolute right-8 flex flex-row">
               <div>
                 <ul className="flex gap-7 left xs:hidden group">
-                  {[
-                    "Work",
-                    "About",
-                    "Services",
-                    "Ideas",
-                    "Careers",
-                    "Contact",
-                  ].map((item, index) => (
+                  {listMenu.map((item, index) => (
                     <li className="font-thin text-white" key={index}>
                       <a href="#" onClick={() => handleLinkClick(index)}>
                         {item}
@@ -85,8 +71,6 @@ const Navbar = () => {
           </div>
         </div>
       </nav>
-      <div style={{ paddingTop: "80px" }}>
-      </div>
     </>
   );
 };

@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-export const Dropdown2 = ({  sortNew,setSortNewPosts }) => {
+export const Dropdown2 = ({ sortNew, setSortNewPosts }) => {
   const [isActive, setIsActive] = useState(false);
 
   const toggleDropdown2 = () => {
@@ -11,17 +11,17 @@ export const Dropdown2 = ({  sortNew,setSortNewPosts }) => {
   const sortNews = ["Newest", "Oldest"];
   return (
     <>
-      <div className="relative inline-block text-left">
+      <div className="relative inline-block text-left -z-50">
         <div>
           <button
             type="button"
-            className="inline-flex w-full justify-center gap-x-1.5 rounded-full bg-white px-12 py-4 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50 "
+            className="inline-flex w-full justify-center gap-x-1.5 rounded-full bg-white px-8 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50 "
             id="menu-button"
             aria-expanded={isActive}
             aria-haspopup="true"
             onClick={toggleDropdown2}
           >
-     {sortNews[0]}
+            {sortNews[0]}
             <svg
               className={`-mr-1 h-5 w-5 text-gray-400 transform transition-transform ${
                 isActive ? "rotate-180" : ""
@@ -49,24 +49,22 @@ export const Dropdown2 = ({  sortNew,setSortNewPosts }) => {
           >
             <div className="py-1" role="none">
               <a
-
                 className="text-gray-700 block px-4 py-2 text-sm"
                 role="menuitem"
                 tabIndex="-1"
                 id="menu-item-0"
-                onClick={()=>setSortNewPosts("-published_at")}
+                onClick={() => setSortNewPosts("-published_at")}
               >
-              {sortNews[0]}
+                {sortNews[0]}
               </a>
               <a
-
                 className="text-gray-700 block px-4 py-2 text-sm"
                 role="menuitem"
                 tabIndex="-1"
                 id="menu-item-1"
-                onClick={()=>setSortNewPosts("published_at")}
+                onClick={() => setSortNewPosts("published_at")}
               >
-              {sortNews[1]}
+                {sortNews[1]}
               </a>
             </div>
           </div>

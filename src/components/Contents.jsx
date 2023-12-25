@@ -14,7 +14,7 @@ export const Contents = () => {
   const dateStrings = (dates) => {
     let dateTimes = dates.map(dateString => new Date(dateString));
     dateTimes.sort((a, b) => b - a);
-    console.log(dateTimes);
+    // console.log(dateTimes);
     // setSortNewPosts(dateTimes);
   };
 
@@ -35,13 +35,13 @@ export const Contents = () => {
   }, [currentPage, sortPosts]); 
 
   const metaCart = posts.meta;
-  console.log(metaCart);
+  // console.log(metaCart);
 
   return (
     <>
-      <div className="justify-center items-center p-7 mx-16 border">
+      <div className="justify-center items-center p-7 mx-16 ">
         <div className="flex flex-row w-full">
-          <div className="flex justify-between items-center border w-full">
+          <div className="flex justify-between items-center  w-full">
             {metaCart && (
               <p className="text-sm text-gray-700 gap-8 ">
                 Showing <span className="font-medium">{metaCart.from}</span> to{" "}

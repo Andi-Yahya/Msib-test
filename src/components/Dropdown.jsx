@@ -11,11 +11,11 @@ export const Dropdown = ({ totalItem, setSortPosts}) => {
   const sortNews = ["Newest", "Oldest"];
   return (
     <>
-      <div className="relative inline-block text-left">
+      <div className="relative inline-block text-left -z-50">
         <div>
           <button
             type="button"
-            className="inline-flex w-full justify-center gap-x-1.5 rounded-full bg-white px-12 py-4 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50 "
+            className="inline-flex w-full justify-center gap-x-1.5 rounded-full bg-white px-12 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50 "
             id="menu-button"
             aria-expanded={isActive}
             aria-haspopup="true"
